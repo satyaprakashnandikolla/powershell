@@ -1,0 +1,13 @@
+# Declare the data of Client name and Path for Renaming
+$V1="FileIdentifier text"
+$New="Replacing name"
+$path=""
+# get the all files list contains based on extanction of TXT and exclude the file containd value in it
+$files=gci -Path $path -recurse -Filter '*.txt' -exclude "*value*.txt"
+#for each file in files list
+ForEach($file in $files)
+{
+# where the objuct name matches to Pattren run the rename  function
+$file | where-object { $_.Name -match $v1 } |
+rename-item -newname {"Prefix" + $New + $V1 + $_.extension}
+}
